@@ -5,6 +5,7 @@ package com.mycompany.labaratory_1;
 
 import controller.Coordination;
 import model.*;
+import view.MyJFrame;
 
 /**
  *
@@ -15,7 +16,9 @@ public class Labaratory_1 {
     public static void main(String[] args) {
         Coordination c = new Coordination();
         c.Import("C:\\Users\\rifa1\\Downloads\\Labaratory_1_example.xlsx", 0);
-        System.out.println(c.geometric_mean());
+       c.geometric_mean();
+       c.Export();
+       new MyJFrame().setVisible(true);
 
     }
 }

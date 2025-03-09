@@ -17,14 +17,13 @@ public class Data_Exchange {
     public XSSFSheet importFromExcel(String file, int list) {
         try {
             XSSFWorkbook myExcelBook = new XSSFWorkbook(new FileInputStream(file));
-            
-            XSSFSheet myExcelSheet = myExcelBook.cloneSheet(list, "Var 1");
+            XSSFSheet myExcelSheet = myExcelBook.getSheetAt(list);
             return myExcelSheet;
         } catch (IOException e) {
-            System.out.println("Erroe");
+            System.out.println("Erroe io");
         }
         catch (IllegalArgumentException ex) {
-            System.out.println("Erroe");
+            System.out.println("Erroe ila");
         }
         return new XSSFWorkbook().createSheet("not found");
     }
