@@ -361,16 +361,19 @@ public class MyJFrame extends javax.swing.JFrame {
             if (y > 1 | y < 0) {
                 throw new NumberFormatException();
             } else {
-                coordination.calculation(y);
-                JOptionPane.showMessageDialog(null, "Расчет стандартных статистических показателей произведён", "Расчёт", JOptionPane.INFORMATION_MESSAGE);
+                boolean res = coordination.calculation(y);
+                if (res) {
+                    JOptionPane.showMessageDialog(null, "Расчёт стандартных статистических показателей произведён", "Расчёт", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Не удалось произвести расчёт стандартных статистических показателей", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
                 calculateDialog.dispose();
                 accuracyTrustInterval.setText("");
 
             }
         } catch (NumberFormatException mismatch) {
             JOptionPane.showMessageDialog(null, "Вводите корректные данные!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch (java.lang.NullPointerException nul) {
+        } catch (java.lang.NullPointerException nul) {
             JOptionPane.showMessageDialog(null, "Вы не импортировали данные!", "Error", JOptionPane.ERROR_MESSAGE);
             accuracyTrustInterval.setText("");
             calculateDialog.dispose();

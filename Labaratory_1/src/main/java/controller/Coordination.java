@@ -41,8 +41,8 @@ public class Coordination {
 
     }
 
-    public void calculation(double y) {
-        
+    public boolean calculation(double y) {
+        try{
         calc = new Calculate(myExcelSheet);
         g_m = calc.geometric_mean();
         a_m = calc.arifmetric_mean();
@@ -55,6 +55,11 @@ public class Coordination {
         var = calc.var();
         max = calc.max();
         min = calc.min();
+        return true;
+        }
+        catch(java.lang.IllegalStateException e){
+            return false;
+        }
 
     }
 
