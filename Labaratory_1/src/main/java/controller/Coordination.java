@@ -17,59 +17,59 @@ public class Coordination {
 
     XSSFSheet myExcelSheet;
     Data_Exchange d_e = new Data_Exchange();
-    Calculate calc = new Calculate();
+    Calculate calc; 
     double[] g_m;
+    double[] a_m;
+    double[] std;
+    double[] range;
+    double[][] cov;
+    double[] number;
+    double[] coef_var;
+    double[][] trust_interval;
+    double[] var;
+    double[] max;
+    double[] min;
 
-    public String Import(String file, int list) {
+    public String data_import(String file, int list) {
+
         myExcelSheet = d_e.importFromExcel(file, list);
         if (myExcelSheet.getSheetName() == "not found") {
             return "No";
         } else {
             return "OK";
         }
-        
 
     }
 
-    public void geometric_mean() {
-        g_m = calc.geometric_means(myExcelSheet);
- 
+    public void calculation(double y) {
+        
+        calc = new Calculate(myExcelSheet);
+        g_m = calc.geometric_mean();
+        a_m = calc.arifmetric_mean();
+        std = calc.std();
+        range = calc.range();
+        cov = calc.cov();
+        number = calc.number();
+        coef_var = calc.coef_var();
+        trust_interval = calc.trust_interval(y);
+        var = calc.var();
+        max = calc.max();
+        min = calc.min();
 
     }
-    public void Export(){
-        try{
-        Workbook book = new XSSFWorkbook();
-        Sheet sheet = book.createSheet(myExcelSheet.getSheetName());
 
-        Row row1 = sheet.createRow(0); 
-        for (int i=0; i< myExcelSheet.getRow(0).getLastCellNum(); i++){
-            row1.createCell(i).setCellValue(myExcelSheet.getRow(0).getCell(i).getStringCellValue());
+    public String data_export(String name) {
+
+        try {
+            Workbook book = d_e.exportInExcel(myExcelSheet, g_m, a_m, std, range, cov, number, coef_var,
+                    trust_interval, var, max, min);
+            book.write(new FileOutputStream(name));
+            book.close();
+            return "Ok";
+        } catch (IOException io) {
+            return "Error";
         }
-        
-        Row row2 = sheet.createRow(1);
-        
-       row2.createCell(0).setCellValue("Среднее геометрическое");
-       Row row3 = sheet.createRow(2);
-       for (int i=0; i< g_m.length; i++){
-            row3.createCell(i).setCellValue(g_m[i]);
-        }
-       sheet.autoSizeColumn(1);
-        book.write(new FileOutputStream("Result.xlsx"));
-        book.close();
-        }
-        catch(IOException io){
-            
-        }
-               /*try {
-            FileWriter writer = new FileWriter("example.txt");
-            
-            writer.write("");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Ошибка при записи в файл");
-            e.printStackTrace();
-        }
-    }*/
+
     }
+
 }
-
