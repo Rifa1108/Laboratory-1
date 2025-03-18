@@ -14,7 +14,7 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
  * @author rifa1
  */
 public class Calculate {
-    XSSFSheet myExcelSheet;
+    private XSSFSheet myExcelSheet;
     
     public Calculate(XSSFSheet myExcelSheet){
         this.myExcelSheet = myExcelSheet;

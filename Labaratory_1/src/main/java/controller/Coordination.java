@@ -15,20 +15,20 @@ import org.apache.poi.xssf.usermodel.*;
  */
 public class Coordination {
 
-    XSSFSheet myExcelSheet;
-    Data_Exchange d_e = new Data_Exchange();
-    Calculate calc; 
-    double[] g_m;
-    double[] a_m;
-    double[] std;
-    double[] range;
-    double[][] cov;
-    double[] number;
-    double[] coef_var;
-    double[][] trust_interval;
-    double[] var;
-    double[] max;
-    double[] min;
+    private XSSFSheet myExcelSheet;
+    private Data_Exchange d_e = new Data_Exchange();
+    private Calculate calc; 
+    private double[] g_m;
+    private double[] a_m;
+    private double[] std;
+    private double[] range;
+    private double[][] cov;
+    private double[] number;
+    private double[] coef_var;
+    private double[][] trust_interval;
+    private double[] var;
+    private double[] max;
+    private double[] min;
 
     public String data_import(String file, int list) {
 
